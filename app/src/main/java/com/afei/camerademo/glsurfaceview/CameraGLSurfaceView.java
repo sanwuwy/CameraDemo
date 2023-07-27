@@ -43,6 +43,7 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        Log.d(TAG, "onSurfaceCreated");
         mTextureId = OpenGLUtils.getExternalOESTextureID();
         mSurfaceTexture = new SurfaceTexture(mTextureId);
         mSurfaceTexture.setOnFrameAvailableListener(this);
@@ -67,15 +68,19 @@ public class CameraGLSurfaceView extends GLSurfaceView implements GLSurfaceView.
 
     @Override
     public void onDrawFrame(GL10 gl) {
+        Log.d(TAG, "[onDrawFrame] start");
         GLES20.glClearColor(0, 0, 0, 0);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         mSurfaceTexture.updateTexImage();
         mDrawer.draw(mTextureId, mCameraProxy.isFrontCamera());
+        Log.d(TAG, "[onDrawFrame] end");
     }
 
     @Override
     public void onFrameAvailable(SurfaceTexture surfaceTexture) {
+        Log.d(TAG, "[onFrameAvailable] start");
         requestRender();
+        Log.d(TAG, "[onFrameAvailable] end");
     }
 
     private void setAspectRatio(int width, int height) {

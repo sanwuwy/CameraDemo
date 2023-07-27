@@ -69,6 +69,7 @@ public class CameraTextureView extends TextureView {
 
         @Override
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+            Log.d(TAG, "onSurfaceTextureUpdated");
         }
     };
 
